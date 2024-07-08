@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->longText('messages')->nullable();
+            $table->longText('message')->nullable();
             $table->foreignId('sender_id')->constrained('users');
             $table->foreignId('receiver_id')->nullable()->constrained('users');
             $table->foreignId('group_id')->nullable()->constrained('groups');
@@ -21,11 +21,11 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::table('groups', function (Blueprint $table) {
             $table->foreignId('last_massage_id')->nullable()->constrained('messages');
         });
 
-        Schema::create('conversations', function (Blueprint $table) {
+        Schema::table('conversations', function (Blueprint $table) {
             $table->foreignId('last_massage_id')->nullable()->constrained('messages');
         });
 
